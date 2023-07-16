@@ -132,8 +132,9 @@ contract Consideration is ConsiderationInterface, OrderCombiner {
      *                   successfully fulfilled.
      */
     function fulfillBasicOrder_efficient_6GL6yc(BasicOrderParameters calldata parameters)
-        external
+        public
         payable
+        virtual
         override
         returns (bool fulfilled)
     {
@@ -169,7 +170,7 @@ contract Consideration is ConsiderationInterface, OrderCombiner {
          */
         Order calldata,
         bytes32 fulfillerConduitKey
-    ) external payable override returns (bool fulfilled) {
+    ) public payable virtual override returns (bool fulfilled) {
         // Convert order to "advanced" order, then validate and fulfill it.
         fulfilled = _validateAndFulfillAdvancedOrder(
             _toAdvancedOrderReturnType(_decodeOrderAsAdvancedOrder)(CalldataStart.pptr()),
@@ -233,7 +234,7 @@ contract Consideration is ConsiderationInterface, OrderCombiner {
         CriteriaResolver[] calldata,
         bytes32 fulfillerConduitKey,
         address recipient
-    ) external payable override returns (bool fulfilled) {
+    ) public payable virtual override returns (bool fulfilled) {
         // Validate and fulfill the order.
         fulfilled = _validateAndFulfillAdvancedOrder(
             _toAdvancedOrderReturnType(_decodeAdvancedOrder)(CalldataStart.pptr()),
@@ -313,7 +314,7 @@ contract Consideration is ConsiderationInterface, OrderCombiner {
         FulfillmentComponent[][] calldata,
         bytes32 fulfillerConduitKey,
         uint256 maximumFulfilled
-    ) external payable override returns (bool[] memory, /* availableOrders */ Execution[] memory /* executions */ ) {
+    ) public payable virtual override returns (bool[] memory, /* availableOrders */ Execution[] memory /* executions */ ) {
         // Convert orders to "advanced" orders and fulfill all available orders.
         return _fulfillAvailableAdvancedOrders(
             _toAdvancedOrdersReturnType(_decodeOrdersAsAdvancedOrders)(CalldataStart.pptr()), // Convert to advanced orders.
@@ -428,7 +429,7 @@ contract Consideration is ConsiderationInterface, OrderCombiner {
         bytes32 fulfillerConduitKey,
         address recipient,
         uint256 maximumFulfilled
-    ) external payable override returns (bool[] memory, /* availableOrders */ Execution[] memory /* executions */ ) {
+    ) public payable virtual override returns (bool[] memory, /* availableOrders */ Execution[] memory /* executions */ ) {
         // Fulfill all available orders.
         return _fulfillAvailableAdvancedOrders(
             _toAdvancedOrdersReturnType(_decodeAdvancedOrders)(CalldataStart.pptr()),
@@ -485,7 +486,7 @@ contract Consideration is ConsiderationInterface, OrderCombiner {
          * @custom:name fulfillments
          */
         Fulfillment[] calldata
-    ) external payable override returns (Execution[] memory /* executions */ ) {
+    ) public payable virtual override returns (Execution[] memory /* executions */ ) {
         // Convert to advanced, validate, and match orders using fulfillments.
         return _matchAdvancedOrders(
             _toAdvancedOrdersReturnType(_decodeOrdersAsAdvancedOrders)(CalldataStart.pptr()),
@@ -561,7 +562,7 @@ contract Consideration is ConsiderationInterface, OrderCombiner {
          */
         Fulfillment[] calldata,
         address recipient
-    ) external payable override returns (Execution[] memory /* executions */ ) {
+    ) public payable virtual override returns (Execution[] memory /* executions */ ) {
         // Validate and match the advanced orders using supplied fulfillments.
         return _matchAdvancedOrders(
             _toAdvancedOrdersReturnType(_decodeAdvancedOrders)(CalldataStart.pptr()),
