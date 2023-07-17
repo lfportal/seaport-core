@@ -96,6 +96,7 @@ contract Consideration is ConsiderationInterface, OrderCombiner {
     function fulfillBasicOrder(BasicOrderParameters calldata parameters)
         public
         payable
+        virtual
         override
         returns (bool fulfilled)
     {
