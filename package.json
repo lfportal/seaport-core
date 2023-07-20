@@ -1,10 +1,10 @@
 {
   "name": "seaport-core",
-  "version": "1.5.0",
+  "version": "1.5.0+im.1",
   "description": "Core smart contracts for the Seaport protocol",
   "main": "src/",
-  "repository": "https://github.com/ProjectOpenSea/seaport-core.git",
-  "author": "OpenSea",
+  "repository": "https://github.com/lfportal/seaport-core.git",
+  "author": "lfportal",
   "license": "MIT",
   "files": [
     "node_modules",
